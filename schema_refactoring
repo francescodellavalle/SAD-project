@@ -1,0 +1,20 @@
+src/
+└── main/
+    └── java/
+        └── com/
+            └── groom/
+                └── manvsclass/
+                    ├── controller/
+                    │   └── HomeController.java
+                    ├── service/
+                    │   ├── ClassService.java
+                    │   ├── AuthenticationService.java
+                    │   ├── StatisticService.java
+                    │   └── AchievementService.java
+                    ├── dto/
+                    │   ├── UserDTO.java
+                    │   └── LoginRequest.java
+                    ├── exception/
+                    │   └── GlobalExceptionHandler.java
+                    └── utils/
+                        └── Utils.java
