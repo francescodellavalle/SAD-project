@@ -2,6 +2,7 @@
 //Bugfix della funzione della registrazione, non coerente con la POST nel controller
 //Aggiunto anche il popup di errore nel caso di una compilazione sbagliata
 
+//MODFICATO CON AGGIUNTA RECAPTCHAV2 (working)
 
 document.addEventListener('DOMContentLoaded', (event) => {
   const form = document.querySelector("form");
