@@ -61,6 +61,7 @@ import com.example.db_setup.Language.*;
 import org.springframework.web.servlet.LocaleResolver;
 //MODIFICA (Deserializzazione risposta JSON)
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonNode;
 //FINE MODIFICA
 
 @RestController
@@ -125,8 +126,11 @@ public class Controller {
 
         //verifica del recaptcha
         //MODIFICA (23/2/2024) : Commento alla riga riguardante il reCAPTCHA perchè non più utilizzato
-        verifyReCAPTCHA(recaptchaResponse); //cambiato nome da g-recaptcha-response
-        
+        //verifyReCAPTCHA(recaptchaResponse); //cambiato nome da g-recaptcha-response
+        if (!verifyReCAPTCHA(recaptchaResponse)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("reCAPTCHA verification failed");
+        }
+
         User n = new User();
 
         // NOME -- Modifica (02/02/2024) : Possibilità di inserire più nomi separati da uno spazio
@@ -203,19 +207,35 @@ public class Controller {
     }
 
     //Verifica del recaptcha
-    private void verifyReCAPTCHA(String gRecaptchaResponse) {
-         HttpHeaders headers = new HttpHeaders();
-         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-    
-         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-         map.add("secretkey", recaptchaSecret);
-         map.add("response", gRecaptchaResponse);
-    
-         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
-         ResponseEntity<String> response = restTemplate.postForEntity(recaptchaServerURL, request, String.class);
-    
-         System.out.println(response);
-    }
+    private boolean verifyReCAPTCHA(String gRecaptchaResponse) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+        map.add("secret", recaptchaSecret); // Cambiato da "secretkey" a "secret"
+        map.add("response", gRecaptchaResponse);
+
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
+
+        try {
+            ResponseEntity<String> response = restTemplate.postForEntity(recaptchaServerURL, request, String.class);
+
+            // Parse JSON response to check if reCAPTCHA was successful
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode jsonResponse = mapper.readTree(response.getBody());
+            boolean success = jsonResponse.path("success").asBoolean();
+
+            if (!success) {
+                System.out.println("reCAPTCHA verification failed: " + jsonResponse);
+            }
+
+            return success;
+        } catch (Exception e) {
+            System.out.println("Error during reCAPTCHA verification: " + e.getMessage());
+            return false;
+        }
+}
+
         
     // Autenticazione
     @PostMapping("/login")
