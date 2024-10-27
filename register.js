@@ -2,7 +2,6 @@
 //Bugfix della funzione della registrazione, non coerente con la POST nel controller
 //Aggiunto anche il popup di errore nel caso di una compilazione sbagliata
 
-//MODFICATO CON AGGIUNTA RECAPTCHAV2 (working)
 
 document.addEventListener('DOMContentLoaded', (event) => {
   const form = document.querySelector("form");
@@ -66,35 +65,32 @@ document.addEventListener('DOMContentLoaded', (event) => {
       console.log(`${pair[0]}: ${pair[1]}`);
     }
 
+    if (!recaptchaToken) {
+      alert("Per favore, completa il reCAPTCHA.");
+      return;
+    }
+
     try {
-      // Integrazione reCAPTCHA
-      grecaptcha.enterprise.ready(async function() {
-        const token = await grecaptcha.execute('6LcWJWsqAAAAAMY1JfUvDMf88Qj_SJbCfERm7hPP', { action: 'register' });
-        formData.append('g-recaptcha-response', token);
-
-        // fatch della richiesta
-        const response = await fetch('/register', {
-          method: 'POST',
-          body: formData,
-        });
-
-        if (!response.ok) {
-          const errorBody = await response.text();
-          console.error('Errore dalla risposta:', errorBody);
-          throw new Error(`Errore dalla richiesta: ${response.status} ${response.statusText}`);
-        }
-
-        // Controllo dello status code di reindirizzamento (301)
-        if (!response.redirected) {
-          // Se non non è 301 lancia un errore
-          const errorBody = await response.text();
-          throw new Error(`Errore: ${errorBody}`);
-        }
-
-        // Se la response è di reindirizzo cerca l'url nell'header della response
-        console.log('Received data:', response.body);
-        window.location.href = response.url;
+      // Invia la richiesta al server
+      const response = await fetch('/register', {
+        method: 'POST',
+        body: formData,
       });
+
+      if (!response.ok) {
+        const errorBody = await response.text();
+        console.error('Errore dalla risposta:', errorBody);
+        throw new Error(`Errore dalla richiesta: ${response.status} ${response.statusText}`);
+      }
+
+      // Controllo dello status code di reindirizzamento (301)
+      if (!response.redirected) {
+        const errorBody = await response.text();
+        throw new Error(`Errore: ${errorBody}`);
+      }
+
+      // Reindirizza alla pagina di successo
+      window.location.href = response.url;
       
     } catch (error) {
       // Pop-up del messaggio di errore da parte della pagina, gestisce anche gli errori del controller
