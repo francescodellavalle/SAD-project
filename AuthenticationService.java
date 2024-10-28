@@ -28,11 +28,12 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-//modifica prova
+
 //AuthenticationService.java:
 
 // Create methods for each admin-related route.
@@ -504,4 +505,70 @@ public class AuthenticationService {
         Admin savedAdmin = arepo.save(admin);
         return ResponseEntity.ok().body(savedAdmin);
     }
+
+    // lato achievement
+
+   @Autowired
+    private AchievementRepository achievementRepository;
+
+    @Autowired
+    private StatisticRepository statisticRepository;
+
+    public ModelAndView showAchievementsPage(HttpServletRequest request, String jwt) {
+        if (isJwtValid(jwt)) {
+            ModelAndView model = new ModelAndView("achievements");
+
+            List<Gamemode> allGamemodes = Arrays.asList(Gamemode.values());
+            List<StatisticRole> allRoles = Arrays.asList(StatisticRole.values());
+            List<Robot> allRobots = Arrays.asList(Robot.values());
+
+            List<Statistic> allStatistics = statisticRepository.findAll();
+
+            model.addObject("gamemodesList", allGamemodes);
+            model.addObject("rolesList", allRoles);
+            model.addObject("robotsList", allRobots);
+            model.addObject("statisticsList", allStatistics);
+
+            return model;
+        }
+
+        return new ModelAndView("login_admin");
+    }
+
+    public ResponseEntity<?> listAchievements() {
+        List<Achievement> achievements = achievementRepository.findAll();
+        return new ResponseEntity<>(achievements, HttpStatus.OK);
+    }
+
+    public Object createAchievement(Achievement achievement, String jwt, HttpServletRequest request) {
+        if (!isJwtValid(jwt)) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("(POST /createAchivement) Attenzione, non sei loggato!");
+        }
+
+        achievementRepository.save(achievement);
+        return showAchievementsPage(request, jwt);
+    }
+
+    public ResponseEntity<?> listStatistics() {
+        List<Statistic> statistics = statisticRepository.findAll();
+        return new ResponseEntity<>(statistics, HttpStatus.OK);
+    }
+
+    public Object createStatistic(Statistic statistic, String jwt, HttpServletRequest request) {
+        if (!isJwtValid(jwt)) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("(POST /createStatistic) Attenzione, non sei loggato!");
+        }
+
+        statisticRepository.save(statistic);
+        return showAchievementsPage(request, jwt);
+    }
+
+    public Object deleteStatistic(String Id, String jwt, HttpServletRequest request) {
+        if (!isJwtValid(jwt)) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("(POST /deleteStatistic) Attenzione, non sei loggato!");
+        }
+
+        statisticRepository.deleteById(Id);
+        return new ModelAndView("achievements");
+    } 
 }
