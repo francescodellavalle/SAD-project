@@ -182,6 +182,8 @@ public class HomeController {
         return authenticationService.eliminaFile(fileName, jwt);
     }
 
+
+
     //parte user
 
     @Autowired
@@ -232,5 +234,128 @@ public class HomeController {
     public ModelAndView showClass(HttpServletRequest request, @CookieValue(name = "jwt", required = false) String jwt) {
         return authenticationService.showClass(request, jwt);
     }
+
+    // ancora admin da admin list ad invitation
+
+    @GetMapping("/admins_list")
+@ResponseBody
+public Object getAllAdmins(@CookieValue(name = "jwt", required = false) String jwt) {
+    return authenticationService.getAllAdmins(jwt);
 }
 
+@GetMapping("/info")
+public ModelAndView showAdmin(HttpServletRequest request, @CookieValue(name = "jwt", required = false) String jwt) {
+    return authenticationService.showAdmin(request, jwt);
+}
+
+@PostMapping("/password_change_admin")
+@ResponseBody
+public ResponseEntity<?> changePasswordAdmin(@RequestBody Admin admin1, @CookieValue(name = "jwt", required = false) String jwt, HttpServletRequest request) {
+    return authenticationService.changePasswordAdmin(admin1, jwt);
+}
+
+@GetMapping("/password_change_admin")
+public ModelAndView showChangePswAdminForm(HttpServletRequest request, @CookieValue(name = "jwt", required = false) String jwt) {
+    return authenticationService.showChangePswAdminForm(request, jwt);
+}
+
+@PostMapping("/password_reset_admin")
+@ResponseBody
+public ResponseEntity<?> resetPasswordAdmin(@RequestBody Admin admin1, @CookieValue(name = "jwt", required = false) String jwt, HttpServletRequest request) {
+    return authenticationService.resetPasswordAdmin(admin1, jwt);
+}
+
+@GetMapping("/password_reset_admin")
+public ModelAndView showResetPswAdminForm(HttpServletRequest request, @CookieValue(name = "jwt", required = false) String jwt) {
+    return authenticationService.showResetPswAdminForm(request, jwt);
+}
+
+@GetMapping("/invite_admins")
+public ModelAndView showInviteAdmins(HttpServletRequest request, @CookieValue(name = "jwt", required = false) String jwt) {
+    return authenticationService.showInviteAdmins(request, jwt);
+}
+
+@PostMapping("/invite_admins")
+@ResponseBody
+public ResponseEntity<?> inviteAdmins(@RequestBody Admin admin1, @CookieValue(name = "jwt", required = false) String jwt, HttpServletRequest request) {
+    return authenticationService.inviteAdmins(admin1, jwt);
+}
+
+@GetMapping("/login_with_invitation")
+public ModelAndView showLoginWithInvitationForm(HttpServletRequest request, @CookieValue(name = "jwt", required = false) String jwt) {
+    return authenticationService.showLoginWithInvitationForm(request, jwt);
+}
+
+@PostMapping("/login_with_invitation")
+@ResponseBody
+public ResponseEntity<?> loginWithInvitation(@RequestBody Admin admin1, @CookieValue(name = "jwt", required = false) String jwt, HttpServletRequest request) {
+    return authenticationService.loginWithInvitation(admin1, jwt);
+}
+
+// scalata
+
+@Autowired
+private ScalataService scalataService;
+
+@GetMapping("/scalata")
+public ModelAndView showGamePageScalata(HttpServletRequest request, @CookieValue(name = "jwt", required = false) String jwt) {
+    return scalataService.showGamePageScalata(request, jwt);
+}
+
+@PostMapping("/configureScalata")
+public ResponseEntity<?> uploadScalata(@RequestBody Scalata scalata, @CookieValue(name = "jwt", required = false) String jwt, HttpServletRequest request) {
+    return scalataService.uploadScalata(scalata, jwt);
+}
+
+@GetMapping("/scalate_list")
+@ResponseBody
+public ResponseEntity<?> listScalate() {
+    return scalataService.listScalate();
+}
+
+@DeleteMapping("delete_scalata/{scalataName}")
+@ResponseBody
+public ResponseEntity<?> deleteScalataByName(@PathVariable String scalataName, @CookieValue(name = "jwt", required = false) String jwt) {
+    return scalataService.deleteScalataByName(scalataName, jwt);
+}
+
+@GetMapping("/retrieve_scalata/{scalataName}")
+@ResponseBody
+public ResponseEntity<?> retrieveScalataByName(@PathVariable String scalataName) {
+    return scalataService.retrieveScalataByName(scalataName);
+}
+
+// achievements and statistics admin
+@GetMapping("/achievements")
+public ModelAndView showAchievementsPage(HttpServletRequest request, @CookieValue(name = "jwt", required = false) String jwt) {
+    return authenticationService.showAchievementsPage(request, jwt);
+}
+
+@GetMapping("/achievements/list")
+@ResponseBody
+public ResponseEntity<?> listAchievements() {
+    return authenticationService.listAchievements();
+}
+
+@PostMapping("/achievements")
+public Object createAchievement(Achievement achievement, @CookieValue(name = "jwt", required = false) String jwt, HttpServletRequest request) {
+    return authenticationService.createAchievement(achievement, jwt, request);
+}
+
+@GetMapping("/statistics/list")
+@ResponseBody
+public ResponseEntity<?> listStatistics() {
+    return authenticationService.listStatistics();
+}
+
+@PostMapping("/statistics")
+public Object createStatistic(Statistic statistic, @CookieValue(name = "jwt", required = false) String jwt, HttpServletRequest request) {
+    return authenticationService.createStatistic(statistic, jwt, request);
+}
+
+@DeleteMapping("/statistics/{Id}")
+public Object deleteStatistic(@PathVariable("Id") String Id, @CookieValue(name = "jwt", required = false) String jwt, HttpServletRequest request) {
+    return authenticationService.deleteStatistic(Id, jwt, request);
+}
+
+}
