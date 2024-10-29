@@ -5,12 +5,15 @@ src/
             └── groom/
                 └── manvsclass/
                     ├── controller/
-                    │   └── HomeController.java
+                    │   └── AdminController.java
+                    │   ├── UserController.java
+                    │   └── UtilsController.java
                     ├── service/
-                    │   ├── ClassService.java
-                    │   ├── AuthenticationService.java
-                    │   ├── StatisticService.java
-                    │   └── AchievementService.java
+                    │   ├── AdminService.java
+                    │   ├── JwtService.java
+                    │   ├── ScalataService.java
+                    │   ├── UserService.java
+                    │   └── UtilsService.java
                     ├── dto/
                     │   ├── UserDTO.java
                     │   └── LoginRequest.java
