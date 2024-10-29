@@ -13,11 +13,4 @@ src/
                     │   ├── JwtService.java
                     │   ├── ScalataService.java
                     │   ├── UserService.java
-                    │   └── UtilsService.java
-                    ├── dto/
-                    │   ├── UserDTO.java
-                    │   └── LoginRequest.java
-                    ├── exception/
-                    │   └── GlobalExceptionHandler.java
-                    └── utils/
-                        └── Utils.java
+                    │   └── UtilsService.jav
