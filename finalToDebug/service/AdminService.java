@@ -700,23 +700,21 @@ public class AdminService {
     //ALTRO NEW (PARTE USER NON VA BENE?)
     public ResponseEntity<?> downloadClasse(@PathVariable("name") String name) throws Exception {
 
-        System.out.println("/downloadFile/{name} (AdminService) - name: "+ name);
-        System.out.println("test");
-        try{
-            List<ClassUT> classe= srepo.findByText(name);
-            System.out.println("File download:");
-            System.out.println(classe.get(0).getcode_Uri());
-            ResponseEntity file =  FileDownloadUtil.downloadClassFile(classe.get(0).getcode_Uri());
-            return file;
-        }
-        catch(Exception e){
-            System.out.println("Eccezione------------");
-            return new ResponseEntity<>("Cartella non trovata.", HttpStatus.NOT_FOUND);
-            }
-        }
+        System.out.println("/downloadFile/{name} (HomeController) - name: "+ name);
+		System.out.println("test");
+		try{
+			List<ClassUT> classe= srepo.findByText(name);
+			System.out.println("File download:");
+			System.out.println(classe.get(0).getcode_Uri());
+			ResponseEntity file =  FileDownloadUtil.downloadClassFile(classe.get(0).getcode_Uri());
+			return file;
+		}
+		catch(Exception e){
+			System.out.println("Eccezione------------");
+			return new ResponseEntity<>("Cartella non trovata.", HttpStatus.NOT_FOUND);
+		}
+    }
 
-    //@GetMapping("/home/{text}")
-        //@ResponseBody
     public    List<ClassUT>    ricercaClasse(@PathVariable String text) {
         return srepo.findByText(text);
     }
@@ -737,6 +735,10 @@ public class AdminService {
         
         // Logica aggiuntiva, se necessaria (es. invalidazione sessione)
         System.out.println("Logout eseguito.");
+    }
+
+    public String test() {
+        return "test T1";
     }
 
 }
