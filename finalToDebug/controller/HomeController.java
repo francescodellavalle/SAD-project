@@ -28,6 +28,7 @@ import com.groom.manvsclass.model.Scalata;
 import com.groom.manvsclass.service.AchievementService;
 import com.groom.manvsclass.service.AdminService;
 import com.groom.manvsclass.service.ScalataService;
+import com.groom.manvsclass.service.Util;
 
 //import org.jcp.xml.dsig.internal.dom.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,9 @@ public class HomeController {
 
     @Autowired
     private AchievementService achievementService;
+
+    @Autowired
+    private Util utilsService;
 
     @GetMapping("/home_adm")
     public ModelAndView showHomeAdmin(HttpServletRequest request, @CookieValue(name = "jwt", required = false) String jwt) {
@@ -331,8 +335,7 @@ public class HomeController {
         }
     }
 
-    // Endpoint per cercare classi
-    @GetMapping("/search/{text}")
+    @GetMapping("/home/{text}")
     public List<ClassUT> ricercaClasse(@PathVariable String text) {
         return adminService.ricercaClasse(text);
     }
@@ -344,6 +347,48 @@ public class HomeController {
         
         // Redirect alla pagina di login
         return new ModelAndView("login_admin");
+    }
+
+    @GetMapping("/test")
+    @ResponseBody
+    public String test() {
+        return adminService.test(); 
+    }
+
+    //mapping interactions
+    @GetMapping("/elencaInt")
+    public List<interaction> elencaInt() {
+        return utilsService.elencaInt();
+    }
+
+    @GetMapping("/elencaReport")
+    public List<interaction> elencaReport() {
+        return utilsService.elencaReport();
+    }
+
+    @GetMapping("/likes/{name}")
+    public long likes(@PathVariable String name) {
+        return utilsService.likes(name);
+    }
+
+    @PostMapping("/uploadInteraction")
+    public interaction uploadInteraction(@RequestBody interaction interazione) {
+        return utilsService.uploadInteraction(interazione);
+    }
+
+    @PostMapping("/newLike/{name}")
+    public String newLike(@PathVariable String name) {
+        return utilsService.newLike(name);
+    }
+
+    @PostMapping("/newReport/{name}")
+    public String newReport(@PathVariable String name, @RequestBody String commento) {
+        return utilsService.newReport(name, commento);
+    }
+
+    @DeleteMapping("/eliminaInteraction/{id_i}")
+    public interaction eliminaInteraction(@PathVariable int id_i) {
+        return utilsService.eliminaInteraction(id_i);
     }
     
 }
