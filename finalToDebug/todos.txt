@@ -1,4 +1,4 @@
--[BUG] non va l upload classi in Admin (forse per questo non vanno le modalita scalata e allenamento lato user)
+-[BUG] non va l upload classi in Admin, uploadAndTest invece si
 -[BUG] scalata non parte lato admin
 -[BUG] partita non parte lato user
 -togliere UserController e UtilsController X
