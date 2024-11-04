@@ -115,6 +115,18 @@ public class HomeController {
         return adminService.ordinaClassiNomi(jwt);
     }
 
+    @GetMapping("/getLikes/{name}")
+    public ResponseEntity<Long> likes(@PathVariable String name) {
+        long likesCount = utilsService.likes(name);
+        return ResponseEntity.ok(likesCount);
+    }
+
+    @PostMapping("/newinteraction") 
+    public ResponseEntity<interaction> uploadInteraction(@RequestBody interaction interazione) {
+        interaction savedInteraction = utilsService.uploadInteraction(interazione); 
+        return ResponseEntity.ok(savedInteraction); 
+    }
+
     @GetMapping("/Cfilterby/{category}")
     @ResponseBody
     public ResponseEntity<List<ClassUT>> filtraClassi(@PathVariable String category, @CookieValue(name = "jwt", required = false) String jwt) {
@@ -307,7 +319,7 @@ public class HomeController {
         return adminService.showPlayer(request, jwt);
     }
 
-    @GetMapping("/class")
+    @GetMapping("class")
     public ModelAndView showClass(HttpServletRequest request, @CookieValue(name = "jwt", required = false) String jwt) {
         return adminService.showClass(request, jwt);
     }
@@ -324,7 +336,15 @@ public class HomeController {
     }
 
     //NEW (PARTE USER PROBLEMATICA)
-    @GetMapping("/download/{name}")
+    @GetMapping("/home")
+	@ResponseBody
+	public ResponseEntity<List<ClassUT>> elencaClassi(@CookieValue(name = "jwt", required = false) String jwt) {
+        System.out.println("(/home) visualizzazione delle classi di gioco");
+        List<ClassUT> classi = adminService.elencaClassi();
+        return ResponseEntity.ok().body(classi);
+    }
+
+    @GetMapping("/downloadFile/{name}")
     public ResponseEntity<?> downloadClasse(@PathVariable("name") String name) {
          try {
             return adminService.downloadClasse(name);
@@ -355,26 +375,26 @@ public class HomeController {
         return adminService.test(); 
     }
 
-    //mapping interactions
-    @GetMapping("/elencaInt")
+    @GetMapping("/interaction")
     public List<interaction> elencaInt() {
         return utilsService.elencaInt();
     }
 
-    @GetMapping("/elencaReport")
+    @GetMapping("/findReport")
     public List<interaction> elencaReport() {
         return utilsService.elencaReport();
     }
 
-    @GetMapping("/likes/{name}")
-    public long likes(@PathVariable String name) {
-        return utilsService.likes(name);
-    }
+    //fake
+    //@GetMapping("/likes/{name}")
+    //public long likes(@PathVariable String name) {
+    //    return utilsService.likes(name);
+    //}
 
-    @PostMapping("/uploadInteraction")
-    public interaction uploadInteraction(@RequestBody interaction interazione) {
-        return utilsService.uploadInteraction(interazione);
-    }
+    //@PostMapping("/uploadInteraction")
+    //public interaction uploadInteraction(@RequestBody interaction interazione) {
+    //    return utilsService.uploadInteraction(interazione);
+    //}
 
     @PostMapping("/newLike/{name}")
     public String newLike(@PathVariable String name) {
@@ -386,7 +406,7 @@ public class HomeController {
         return utilsService.newReport(name, commento);
     }
 
-    @DeleteMapping("/eliminaInteraction/{id_i}")
+    @DeleteMapping("/deleteint/{id_i}")
     public interaction eliminaInteraction(@PathVariable int id_i) {
         return utilsService.eliminaInteraction(id_i);
     }
