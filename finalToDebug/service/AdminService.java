@@ -741,4 +741,8 @@ public class AdminService {
         return "test T1";
     }
 
+    public List<ClassUT> elencaClassi() {
+        return repo.findAll();
+    }
+
 }
