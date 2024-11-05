@@ -7,7 +7,7 @@
 -documentazione su: stato del sistema all'inizio, fasi di sviluppo, fixing recaptcha (backend e frontend), refactoring T1
 
 [bonus]
--bottoni in home_utente->profilo non funzionano
+-bottoni in home_utente->profilo non funzionano 
 -recaptcha anche in login (lato user) 
--mettere tasto/reindirizzamento automatico dopo aver fatto upload classe
+-mettere tasto/reindirizzamento automatico dopo aver fatto upload classe X
 -AdminService ha tanta roba, andrebbe diviso in base a qualche funzionalità (NOP)
