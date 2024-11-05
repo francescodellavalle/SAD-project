@@ -26,16 +26,7 @@ public class ScalataService {
     private static final Logger logger = LoggerFactory.getLogger(ScalataService.class);
 
     public ModelAndView showGamePageScalata(HttpServletRequest request, String jwt) {
-        try {
-            if (jwtService.isJwtValid(jwt)) {
-                return new ModelAndView("scalata");
-            } else {
-                return new ModelAndView("login_admin");
-            }
-        } catch (Exception e) {
-            logger.error("Errore durante la verifica del token JWT per la pagina scalata", e);
-            return new ModelAndView("error").addObject("message", "Errore interno del server");
-        }
+        return new ModelAndView("scalata");
     }
 
     public ResponseEntity<?> uploadScalata(Scalata scalata, String jwt) {
