@@ -1,6 +1,6 @@
 -[BUG] in Admin non va l upload classi, uploadAndTest invece si
 -[BUG] scalata non parte lato admin
--[BUG] partita e allenamento non partono lato user
+-[BUG] partita e allenamento non partono lato user X (partono ma c è il problema pregresso bug seconda partita)
 -togliere UserController e UtilsController X
 
 -documentazione su: stato del sistema all'inizio, fasi di sviluppo, fixing recaptcha (backend e frontend), refactoring T1
