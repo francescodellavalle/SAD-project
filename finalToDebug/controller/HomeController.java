@@ -53,6 +53,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.data.mongodb.core.query.Query;
 
+@CrossOrigin
 @Controller
 public class HomeController {
 
@@ -116,12 +117,14 @@ public class HomeController {
     }
 
     @GetMapping("/getLikes/{name}")
+    @ResponseBody
     public ResponseEntity<Long> likes(@PathVariable String name) {
         long likesCount = utilsService.likes(name);
         return ResponseEntity.ok(likesCount);
     }
 
     @PostMapping("/newinteraction") 
+    @ResponseBody
     public ResponseEntity<interaction> uploadInteraction(@RequestBody interaction interazione) {
         interaction savedInteraction = utilsService.uploadInteraction(interazione); 
         return ResponseEntity.ok(savedInteraction); 
@@ -215,6 +218,7 @@ public class HomeController {
     }
     
     @GetMapping("/invite_admins")
+    @ResponseBody
     public ModelAndView showInviteAdmins(HttpServletRequest request, @CookieValue(name = "jwt", required = false) String jwt) {
         return adminService.showInviteAdmins(request, jwt);
     }
@@ -226,6 +230,7 @@ public class HomeController {
     }
     
     @GetMapping("/login_with_invitation")
+    @ResponseBody
     public ModelAndView showLoginWithInvitationForm(HttpServletRequest request, @CookieValue(name = "jwt", required = false) String jwt) {
         return adminService.showLoginWithInvitationForm(request, jwt);
     }
@@ -326,6 +331,7 @@ public class HomeController {
 
     //NEW (SCORDATO?)
     @PostMapping("/loginAdmin")
+    @ResponseBody
     public ResponseEntity<String> loginAdmin(@RequestBody Admin admin1, @CookieValue(name = "jwt", required = false) String jwt, HttpServletResponse response) {
         return adminService.loginAdmin(admin1, jwt, response);
     }
@@ -345,6 +351,7 @@ public class HomeController {
     }
 
     @GetMapping("/downloadFile/{name}")
+    @ResponseBody
     public ResponseEntity<?> downloadClasse(@PathVariable("name") String name) {
          try {
             return adminService.downloadClasse(name);
@@ -356,6 +363,7 @@ public class HomeController {
     }
 
     @GetMapping("/home/{text}")
+    @ResponseBody
     public List<ClassUT> ricercaClasse(@PathVariable String text) {
         return adminService.ricercaClasse(text);
     }
@@ -376,11 +384,13 @@ public class HomeController {
     }
 
     @GetMapping("/interaction")
+    @ResponseBody
     public List<interaction> elencaInt() {
         return utilsService.elencaInt();
     }
 
     @GetMapping("/findReport")
+    @ResponseBody
     public List<interaction> elencaReport() {
         return utilsService.elencaReport();
     }
@@ -397,16 +407,19 @@ public class HomeController {
     //}
 
     @PostMapping("/newLike/{name}")
+    @ResponseBody
     public String newLike(@PathVariable String name) {
         return utilsService.newLike(name);
     }
 
     @PostMapping("/newReport/{name}")
+    @ResponseBody
     public String newReport(@PathVariable String name, @RequestBody String commento) {
         return utilsService.newReport(name, commento);
     }
 
-    @DeleteMapping("/deleteint/{id_i}")
+    @PostMapping("/deleteint/{id_i}")
+    @ResponseBody
     public interaction eliminaInteraction(@PathVariable int id_i) {
         return utilsService.eliminaInteraction(id_i);
     }
