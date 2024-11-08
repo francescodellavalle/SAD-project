@@ -30,4 +30,4 @@ achievement e statistiche, assicurando che le operazioni siano eseguite solo se 
 
 Oltre alla ristrutturazione del codice, sono stati introdotti diversi miglioramenti, tra cui:
 - ripristino della funzionalità **reCAPTCHA** (Vedi ISSUE #27) in fase di registrazione dei Players.
-- quando l'admin carica una classe (sia da sola che con i test pre-generati) è stata aggiunto un **messaggio di corretto Upload Classe**, seguito da un reindirizzamento automatico alla pagina dell'home admin.
+- quando l'admin carica una classe (sia da sola che con i test pre-generati) è stata aggiunto un **messaggio di corretto Upload Classe**, seguito dal reindirizzamento automatico alla pagina dell'home admin.
