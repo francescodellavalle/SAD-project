@@ -25,7 +25,7 @@ plicazione. Questo servizio garantisce che solo gli utenti autenticati possano a
 4. **Util**: offre diversi metodi di utilità per gestire le interazioni con l’entità interaction, gestendo le interazioni come "like" e "report" associati a una determinata classe, oltre ad ottenere un elenco
 di report.
 
-5: **AchievementService**: estisce la logica relativa agli achievement (obiettivi) e alle statistiche dell’applicazione. Questa classe fornisce metodi per visualizzare, creare, elencare e cancellare
+5. **AchievementService**: estisce la logica relativa agli achievement (obiettivi) e alle statistiche dell’applicazione. Questa classe fornisce metodi per visualizzare, creare, elencare e cancellare
 achievement e statistiche, assicurando che le operazioni siano eseguite solo se il token JWT è valido (tramite JwtService).
 
 Oltre alla ristrutturazione del codice, sono stati introdotti diversi miglioramenti, tra cui:
