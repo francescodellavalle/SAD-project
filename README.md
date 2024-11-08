@@ -17,14 +17,13 @@ In particolare, i servizi implementati sono:
 
 2. **JwtService**: è responsabile della generazione e della validazione dei token JWT (JSON Web Token) per gestire l’autenticazione e l’autorizzazione degli utenti amministrativi all’interno dell’ap-
 plicazione. Questo servizio garantisce che solo gli utenti autenticati possano accedere a determinate funzionalità, verificando la validità dei token JWT associati alle richieste.
-- Fornisce il metodo generateToken per generare un token JWT per un utente amministrativo, che può essere utilizzato come strumento di autenticazione per le richieste successive.
-- Il metodo _isJwtValid_ consente di validare i token JWT ricevuti, assicurandosi che siano autentici e non scaduti.
+   - Fornisce il metodo generateToken per generare un token JWT per un utente amministrativo, che può essere utilizzato come strumento di autenticazione per le richieste successive.
+   - Il metodo _isJwtValid_ consente di validare i token JWT ricevuti, assicurandosi che siano autentici e non scaduti.
 
 3. **ScalataService**: gestisce le operazioni relative all’entità Scalata, includendo operazioni CRUD (Creazione, Lettura e Cancellazione), e utilizza la validazione JWT per limitare l’accesso.
 
 4. **Util**: offre diversi metodi di utilità per gestire le interazioni con l’entità interaction, gestendo le interazioni come "like" e "report" associati a una determinata classe, oltre ad ottenere un elenco
 di report.
-
 
 5: **AchievementService**: estisce la logica relativa agli achievement (obiettivi) e alle statistiche dell’applicazione. Questa classe fornisce metodi per visualizzare, creare, elencare e cancellare
 achievement e statistiche, assicurando che le operazioni siano eseguite solo se il token JWT è valido (tramite JwtService).
