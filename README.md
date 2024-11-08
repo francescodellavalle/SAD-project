@@ -10,6 +10,7 @@ Abbiamo quindi ristrutturato il task T1 con la seguente strategia:
 - **Separazione delle funzionalità**:  sono state separate dal controller le funzionalità di routing da quella della logica, che invece è stata delegata a servizi specifici.
 - **Implementazione di Servizi:**: la logica di business è stata estratta in servizi dedicati, facilitando la testabilità e il riutilizzo. Così facendo le operazioni vengono affidate ai servizi, mantenendo il codice separato e focalizzato.
 
+
 Oltre alla ristrutturazione del codice, sono stati introdotti diversi miglioramenti, tra cui:
 - ripristino della funzionalità **reCAPTCHA** (Vedi ISSUE #27) in fase di registrazione dei Players.
 - quando l'admin carica una classe (sia da sola che con i test pre-generati) è stata aggiunto un messaggio di corretto Upload Classe, seguito da un reindirizzamento automatico alla pagina dell'home admin.
