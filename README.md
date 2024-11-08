@@ -12,7 +12,7 @@ Abbiamo quindi ristrutturato il task T1 con la seguente strategia:
 
 In particolare, i servizi implementati sono:
 1. **AdminService**: è pensato per essere utilizzato dai controller dell’applicazione che gestiscono le richieste amministrative, fornendo una logica centralizzata per l’amministrazione delle classi e degli utenti admin.
-   - Contiene i metodi di Autenticazione, tramite inclusiome della gestione di token JWT da JwtService per l’autenticazione e l’autorizzazione degli amministratori, e la registrazione di nuovi amministratori.
+   - Contiene i metodi di Autenticazione, tramite inclusione della gestione di token JWT da JwtService per l’autenticazione e l’autorizzazione degli amministratori, e la registrazione di nuovi amministratori.
    - Si occupa della gestione delle Classi tramite una serie di operazioni CRUD (Create, Read, Update, Delete), oltre a filtraggi e ordinamenti delle classi stesse.
 
 2. **JwtService**: è responsabile della generazione e della validazione dei token JWT (JSON Web Token) per gestire l’autenticazione e l’autorizzazione degli utenti amministrativi all’interno dell’ap-
