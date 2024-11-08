@@ -1,13 +1,4 @@
--verifica se profilo si carica le statistiche nella old version (Michele), e nel caso aggiustare nostra + verifica pulsanti (vedi bonus)
--[BUG] in Admin non va l upload classi, uploadAndTest invece si
--[BUG] scalata non parte lato admin X (ammacchiato ma va)
--[BUG] partita e allenamento non partono lato user X (partono ma c è il problema pregresso bug seconda partita)
--togliere UserController e UtilsController X
-
--documentazione su: stato del sistema all'inizio, fasi di sviluppo, fixing recaptcha (backend e frontend), refactoring T1
-
-[bonus]
--bottoni in home_utente->profilo non funzionano 
--recaptcha anche in login (lato user) 
--mettere tasto/reindirizzamento automatico dopo aver fatto upload classe X
--AdminService ha tanta roba, andrebbe diviso in base a qualche funzionalità (NOP)
+-[documentazione] fare sequence diagram (ese di upload class)
+-[documentazione] sistemare prima parte descrizione del sistema generale
+-[codice] ripristinare commenti vecchi (old version), e aggiungere alle parti nostre (nei service, negli html cambiati ecc...)
+-[github] caricare tutto progetto
