@@ -10,6 +10,13 @@ Abbiamo quindi ristrutturato il task T1 con la seguente strategia:
 - **Separazione delle funzionalità**:  sono state separate dal controller le funzionalità di routing da quella della logica, che invece è stata delegata a servizi specifici.
 - **Implementazione di Servizi:**: la logica di business è stata estratta in servizi dedicati, facilitando la testabilità e il riutilizzo. Così facendo le operazioni vengono affidate ai servizi, mantenendo il codice separato e focalizzato.
 
+In particolare, i servizi implementati sono:
+1. **AdminService**: è pensato per essere utilizzato dai controller dell’applicazione che gestiscono le richieste amministrative, fornendo una logica centralizzata per l’amministrazione delle classi e degli utenti admin.
+   - Contiene i metodi di Autenticazione, tramite inclusiome della gestione di token JWT da JwtService per l’autenticazione e l’autorizzazione degli amministratori, e la registrazione di nuovi amministratori.
+   - Si occupa della gestione delle Classi tramite una serie di operazioni CRUD (Create, Read, Update, Delete), oltre a filtraggi e ordinamenti delle classi stesse.
+
+2. **JwtService**:
+
 
 Oltre alla ristrutturazione del codice, sono stati introdotti diversi miglioramenti, tra cui:
 - ripristino della funzionalità **reCAPTCHA** (Vedi ISSUE #27) in fase di registrazione dei Players.
