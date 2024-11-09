@@ -1,4 +1,0 @@
--[documentazione] fare sequence diagram (ese di upload class)
--[documentazione] sistemare prima parte descrizione del sistema generale
--[codice] ripristinare commenti vecchi (old version), e aggiungere alle parti nostre (nei service, negli html cambiati ecc...)
--[github] caricare tutto progetto
