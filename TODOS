@@ -1,4 +1,4 @@
--vpp con tutti i diagrammi fatti (use case, composite, component, deployment X) (mancano new composite, sequence, package service)(lorenzo)
+-vpp con tutti i diagrammi fatti (use case, composite, component, deployment X) (mancano new composite, sequence, package diagram completo)(lorenzo)
 -Package Service: sono dipendenze tratteggiate, togliere <<abstract class>> X
 -Aggiungere Package complessivo in cui si vede che riguarda T1 (?) (da diagramma lorenzo)
 -Dettagliare il sequence diagram con i mode
