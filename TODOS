@@ -1,0 +1,5 @@
+-vpp con tutti i diagrammi fatti
+-Package Service: sono dipendenze tratteggiate, togliere <<abstract class>> X
+-Aggiungere Package complessivo in cui si vede che riguarda T1 (?)
+-Dettagliare il sequence diagram con i mode
+-[testing] -Aggiungere Testing sulla documentazione + Aggiungere l'issue del ricaricare la classe con lo stesso nome, con suggerimento  
